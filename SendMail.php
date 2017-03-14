@@ -27,8 +27,8 @@ $message = "<!DOCTYPE html>
       <table>
          <tr style=\"display: block;\">
             <td id=\"tovar\" style=\"width : 25%;\"> Наименование </td>
-            <td id=\"quantity\" style=\"width : 5%;\"> Кол-во       </td>
-            <td id=\"model\" style=\"width : 45%;\"> Параметры      </td>
+            <td id=\"quantity\" style=\"width : 10%;\"> Кол-во       </td>
+            <td id=\"model\" style=\"width : 25%;\"> Параметры      </td>
             <td id=\"price\" style=\"width : 10%;\"> Стоимость    </td>
             <td id=\"pict\" style=\"width : auto;\"> Эскиз    </td>
          </tr>"
@@ -44,18 +44,14 @@ foreach($datamsv[order_lines] as $N => $line){
 		curl_close($ch);
 //			$link = substr(strstr($value, "Изображение : "), 24);
 		$message .= "<tr style=\"display: block;\" ><td id=\"tovar\" style=\"width : 25%;\">".$nocommentmsv[title]."</td>
-						<td id=\"quantity\" style=\"width : 5%;\">".$line[quantity]."</td>
-						<td id=\"model\"></td>
-						<td id=\"color\"></td>
-						<td id=\"\"></td>
-						<td id=\"age\"></td>
-						<td id=\"size\">".$nocommentmsv[characteristics][1][title]."</td>
-						<td id=\"price\">".(int)$nocommentmsv[variants][0][price]."</td>"
+						<td id=\"quantity\" style=\"width : 10%;\">".$line[quantity]."</td>
+						<td id=\"size\" style=\"width : 25%;\">".$nocommentmsv[characteristics][1][title]."</td>
+						<td id=\"price\" style=\"width : 10%;\">".(int)$nocommentmsv[variants][0][price]."</td>"
 		;
 		if (!empty($nocomentmsv[image])){
-			$message .= "<td>Нет изображения</td></tr>";
+			$message .= "<td style=\"width : auto;\">Нет изображения</td></tr>";
 		} else {
-			$message .= "<td><img src=\"".$nocommentmsv[images][0][original_url]."\"alt=\"".$nocommentmsv[title]."\"width=\"100\" height=\"150\" align=\"right\"></td></tr>";
+			$message .= "<td style=\"width : auto;\"><img src=\"".$nocommentmsv[images][0][original_url]."\"alt=\"".$nocommentmsv[title]."\"></td></tr>";
 		}
 
 	} else{
@@ -64,7 +60,7 @@ foreach($datamsv[order_lines] as $N => $line){
 		foreach($commenties as $value){
 			$link = substr(strstr($value, "Изображение : "), 24);
 			$message .= "<tr style=\"display: block;\" ><td id=\"tovar\" style=\"width : 25%;\" >".$line[title]."</td>
-							<td id=\"quantity\" style=\"width : 5%;\"> 1</td>";
+							<td id=\"quantity\" style=\"width : 10%;\"> 1</td><td style=\"width : 10%;\">";
 			$parameters = array(
 				"Модель: "  => substr(strstr($value, "Модель : "), 15, strpos(strstr($value, "Модель : "), "\n")-15)."<br>",
 				"Цвет: "    => substr(strstr($value, "Цвет : "), 11, strpos(strstr($value, "Цвет : "), "\n")-11)."<br>",
@@ -77,8 +73,8 @@ foreach($datamsv[order_lines] as $N => $line){
 					$message .= $param.$val;
 				}
 			}
-			$message .= "<td>".substr(strstr($value, "Стоимость : "), 20, strpos(strstr($value, "Стоимость : "), "\n")-20)."</td>
-			<td><img src=".$link."alt=\"".$line[title]."\"width=\"100\" height=\"150\" align=\"right\"></td></tr>";
+			$message .= "</td><td style=\"width : 10%;\" >".substr(strstr($value, "Стоимость : "), 20, strpos(strstr($value, "Стоимость : "), "\n")-20)."</td>
+			<td style=\"width : auto;\"><img src=".$link."alt=\"".$line[title]."\"></td></tr>";
 		}		
 	}
 } 
@@ -92,7 +88,7 @@ foreach($datamsv[order_lines] as $N => $line){
 			"
 		</p>
 		<p>
-			-<br>
+			<br>
 			С уважением,<br>
 			магазин <a href='http://poduschki.ru'>\"Купи Презент\"</a>
 		</p>
