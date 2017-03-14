@@ -11,7 +11,7 @@ $message = "<!DOCTYPE html>
       <title>HTML Document</title>
    </head>
    <body>
-   <div>
+   <div style=\"font-family: Arial, sans-serif;color:#333\">
       <p>
          Здравствуйте, ".$datamsv[client][middlename]." ".$datamsv[client][name]."!
       </p>
@@ -23,45 +23,46 @@ $message = "<!DOCTYPE html>
       </p>
       <p>
          Внимательно проверьте Ваш заказ, а также описание товаров
-      </p>
-      <table>
-         <tr style=\"display: block;\">
-            <td id=\"tovar\" style=\"width : 25%;display: inline-block;padding: 0 0 0 0;text-align: center;\"> Наименование </td>
-            <td id=\"quantity\" style=\"width : 10%;display: inline-block;padding: 0 0 0 0;text-align: center;\"> Кол-во       </td>
-            <td id=\"model\" style=\"width : 25%;display: inline-block;padding: 0 0 0 0;text-align: center;\"> Параметры      </td>
-            <td id=\"price\" style=\"width : 10%;display: inline-block;padding: 0 0 0 0;text-align: center;\"> Стоимость    </td>
-            <td id=\"pict\" style=\"width : auto;display: inline-block;padding: 0 0 0 0;text-align: center;\"> Эскиз    </td>
-         </tr>"
-;
+      </p>";
+
+$imStyle = "style = \"display : inline-block; width : 33%; padding: 0px 0px 0px 0px; margin: 5px; text-align : center;box-shadow: 0 0 10px rgba(0,0,0,0.5);\"";
 
 foreach($datamsv[order_lines] as $N => $line){
 	if ($line[comment] == ""){
+
 		$url="http://InSalesOrderWidget:ce87f63b67e9c7cb3a6bc288ecafbb54@shop-76661.myinsales.ru/admin/products/".$line[product_id].".json";
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
 		$nocommentmsv = json_decode(curl_exec($ch), true);
 		curl_close($ch);
-//			$link = substr(strstr($value, "Изображение : "), 24);
-		$message .= "<tr style=\"display: block;text-align: center;\" ><td id=\"tovar\" style=\"width : 25%;display: inline-block;padding: 0 0 0 0;text-align: right;\">".$nocommentmsv[title]."</td>
-						<td id=\"quantity\" style=\"width : 10%;display: inline-block;padding: 0 0 0 0;text-align: center;\">".$line[quantity]."</td>
-						<td id=\"size\" style=\"width : 25%;display: inline-block;padding: 0 0 0 0;text-align: right;\">".$nocommentmsv[characteristics][1][title]."</td>
-						<td id=\"price\" style=\"width : 10%;display: inline-block;padding: 0 0 0 0;text-align: center;\">".(int)$nocommentmsv[variants][0][price]."</td>"
-		;
+
 		if (!empty($nocomentmsv[image])){
-			$message .= "<td style=\"width : auto;display: inline-block;padding: 0 0 0 0;text-align: center;\">Нет изображения</td></tr>";
+			$message .= "<div><div ".$imStyle.">Нет изображения</div>";
 		} else {
-			$message .= "<td style=\"width : auto;display: inline-block;padding: 0 0 0 0;text-align: center;\"><img src=\"".$nocommentmsv[images][0][original_url]."\"alt=\"".$nocommentmsv[title]."\"></td></tr>";
+			$message .= "<div ".$imStyle."><img style=\"width: 100%;\" src=\"".$nocommentmsv[images][0][original_url]."\"alt=\"".$nocommentmsv[title]."\"></div>";
 		}
 
+		$message .= "
+			<div style= \"display : inline-block;vertical-align : top;margin:10px;width: 50%;\">
+				<div style=\"font-weight:bold;font-size : 125%;\">".$nocommentmsv[title]."</div>
+				<div style=\"color : gray;font-size : 110%;\">".$line[quantity]." X ".$nocommentmsv[variants][0][price]." руб.</div>
+			</div></div>";
 	} else{
 		$commenties = split("--------------------", $line[comment]);
 		$delete = array_pop($commenties);
 		foreach($commenties as $value){
 			$link = substr(strstr($value, "Изображение : "), 24);
-			$message .= "<tr style=\"display: block;\" ><td id=\"tovar\" style=\"width : 25%;display: inline-block;padding: 0 0 0 0;text-align: right;\" >".$line[title]."</td>
-							<td id=\"quantity\" style=\"width : 10%;display: inline-block;padding: 0 0 0 0;text-align: center;\"> 1</td><td style=\"width : 25%;display: inline-block;padding: 0 0 0 0;text-align: right;\">";
-			$parameters = array(
+
+			$message .= "<div><div ".$imStyle."><img style=\"width: 100%;\" src=".$link."alt=\"".$line[title]."\"></div>";
+
+			$message .= "
+			<div style= \"display : inline-block;vertical-align : top;margin:10px;width: 50%;\">
+				<div style=\"font-weight:bold;font-size : 125%;\">".$line[title]."</div>
+				<div style=\"color : gray;font-size : 110%;\">1 X ".substr(strstr($value, "Стоимость : "), 20, strpos(strstr($value, "Стоимость : "), "\n")-21).".0 руб.</div>
+			</div></div>";
+
+			/*$parameters = array(
 				"Модель: "  => substr(strstr($value, "Модель : "), 15, strpos(strstr($value, "Модель : "), "\n")-15)."<br>",
 				"Цвет: "    => substr(strstr($value, "Цвет : "), 11, strpos(strstr($value, "Цвет : "), "\n")-11)."<br>",
 				"Пол: "     => substr(strstr($value, "Пол : "), 9, strpos(strstr($value, "Пол : "), "\n")-9)."<br>",
@@ -72,9 +73,7 @@ foreach($datamsv[order_lines] as $N => $line){
 				if ( $val != "" ){
 					$message .= $param.$val;
 				}
-			}
-			$message .= "</td><td style=\"padding: 0 0 0 0;width : 10%;display: inline-block;text-align: center;\" >".substr(strstr($value, "Стоимость : "), 20, strpos(strstr($value, "Стоимость : "), "\n")-20)."</td>
-			<td style=\"padding: 0 0 0 0;width : auto;display: inline-block;text-align: center;\"><img src=".$link."alt=\"".$line[title]."\"></td></tr>";
+			}*/
 		}		
 	}
 } 
@@ -99,5 +98,5 @@ foreach($datamsv[order_lines] as $N => $line){
 $headers = "Content-type: text/html; charset=utf-8\n";
 $headers .= "From: <service@poduschki.ru>";
 
-mail("alex.bityuckov@yandex.ru", $title, $message, $headers);
+mail("bin.dev8@gmail.com", $title, $message, $headers);
 
