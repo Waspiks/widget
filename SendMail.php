@@ -48,7 +48,7 @@ foreach($datamsv[order_lines] as $N => $line){
 		curl_close($ch);
 //			$link = substr(strstr($value, "Изображение : "), 24);
 		$message .= "<tr style=\"display: block;\" ><td id=\"tovar\" style=\"width : 25%;\">".$nocommentmsv[title]."</td>
-						<td id=\"quantity\" style=\"width : 5%;\">".$nocommentmsv[variants][0][quantity]."</td>
+						<td id=\"quantity\" style=\"width : 5%;\">".$line[quantity]."</td>
 						<td id=\"model\"></td>
 						<td id=\"color\"></td>
 						<td id=\"\"></td>
