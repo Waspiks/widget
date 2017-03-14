@@ -56,7 +56,7 @@ foreach($datamsv[order_lines] as $N => $line){
 						<td id=\"price\">".(int)$nocommentmsv[variants][0][price]."</td>"
 		;
 		if (!empty($nocomentmsv[image])){
-			$message .= "<td><img src=\"http://www.imgzilla.ru/image.uploads/2017-03-14/original-1c9fa77f58134e8e0d9840e7ef3974f4.jpg" alt=\"".$nocommentmsv[title]."\"width=\"100\" height=\"150\" align=\"right\"></td></tr>";
+			$message .= "<td><img src=\"http://www.imgzilla.ru/image.uploads/2017-03-14/original-1c9fa77f58134e8e0d9840e7ef3974f4.jpg\" alt=\"".$nocommentmsv[title]."\"width=\"100\" height=\"150\" align=\"right\"></td></tr>";
 		} else {
 			$message .= "<td><img src=\"".$nocommentmsv[images][0][original_url]."\"alt=\"".$nocommentmsv[title]."\"width=\"100\" height=\"150\" align=\"right\"></td></tr>";
 		}
