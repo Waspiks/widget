@@ -77,23 +77,23 @@ foreach($datamsv[order_lines] as $N => $line){
 					$message .= $param.$val;
 				}
 			}
-			$message .= substr(strstr($value, "Стоимость : "), 20, strpos(strstr($value, "Стоимость : "), "\n")-20)."</td>
+			$message .= "<td>".substr(strstr($value, "Стоимость : "), 20, strpos(strstr($value, "Стоимость : "), "\n")-20)."</td>
 			<td><img src=".$link."alt=\"".$line[title]."\"width=\"100\" height=\"150\" align=\"right\"></td></tr>";
 		}		
 	}
 } 
 		$message .= "</table>";
-		$message .= "Стоимость: ".$datamsv[items_price]." руб\p\n
+		$message .= "Стоимость: ".$datamsv[items_price]." руб<br>
 		Доставка: ".$datamsv[full_delivery_price]." ".$line[delivery_title]." ".$line[delivery_description]."
 		</p>
 		<p>
-			\nОбщая стоимость заказа: ".$datamsv[total_price]."\n"
+			\nОбщая стоимость заказа: ".$datamsv[total_price]."<br>"
 			.$line[payment_description].
 			"
 		</p>
 		<p>
-			-\p\n
-			С уважением,\p\n
+			-<br>
+			С уважением,<br>
 			магазин <a href='http://poduschki.ru'>\"Купи Презент\"</a>
 		</p>
 		</div>
