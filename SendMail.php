@@ -139,6 +139,6 @@ foreach($datamsv[order_lines] as $N => $line){
 $headers = "Content-type: text/html; charset=utf-8\n";
 $headers .= "From: <service@poduschki.ru>";
 
-mail("waspiks@live.ru", $title, $message, $headers);
+mail("alex.bityuckov@yandex.ru", $title, $message, $headers); //waspiks@live.ru
 
 
