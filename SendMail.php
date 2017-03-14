@@ -90,12 +90,12 @@ foreach($datamsv[order_lines] as $N => $line){
 						<td class=\"\"></td>
 						<td class=\"age\"></td>
 						<td class=\"size\">".$nocommentmsv[characteristics][1][title]."</td>
-						<td class=\"price\">".$nocommentmsv[variants][0][price]."</td>"
+						<td class=\"price\">".(int)$nocommentmsv[variants][0][price]."</td>"
 		;
 		if (!empty($nocomentmsv[image])){
-			$message .= "<td><img src=\"http://poduschki.ru/images/no_image_large.jpg\" alt=\"".$nocommentmsv[title]."\"width=\"80\" height=\"150\" align=\"right\"></td></tr>";
+			$message .= "<td><img src=\"http://lovemyrobe.ru/InSalesOrderWidget/noPhoto.jpg\" alt=\"".$nocommentmsv[title]."\"width=\"100\" height=\"150\" align=\"right\"></td></tr>";
 		} else {
-			$message .= "<td><img src=\"".$nocommentmsv[images][0][original_url]."\"alt=\"".$nocommentmsv[title]."\"width=\"80\" height=\"150\" align=\"right\"></td></tr>";
+			$message .= "<td><img src=\"".$nocommentmsv[images][0][original_url]."\"alt=\"".$nocommentmsv[title]."\"width=\"100\" height=\"150\" align=\"right\"></td></tr>";
 		}
 
 	} else{
@@ -105,13 +105,13 @@ foreach($datamsv[order_lines] as $N => $line){
 			$link = substr(strstr($value, "Изображение : "), 24);
 			$message .= "<tr><td class=\"tovar\">".$line[title]."</td>
 							<td class=\"quantity\"> 1</td>
-							<td class=\"model\">".substr(strstr($comment, "Модель : "), 15, strpos(strstr($comment, "Модель : "), "\n")-15)."</td>
-							<td class=\"color\">".substr(strstr($comment, "Цвет : "), 11, strpos(strstr($comment, "Цвет : "), "\n")-11)."</td>
-							<td class=\"\">".substr(strstr($comment, "Пол : "), 9, strpos(strstr($comment, "Пол : "), "\n")-9)."</td>
-							<td class=\"age\">".substr(strstr($comment, "Возраст : "), 16, strpos(strstr($comment, "Возраст : "), "\n")-16)."</td>
-							<td class=\"size\">".substr(strstr($comment, "Размер : "), 14, strpos(strstr($comment, "Размер : "), "\n")-14)."</td>
+							<td class=\"model\">".substr(strstr($value, "Модель : "), 15, strpos(strstr($value, "Модель : "), "\n")-15)."</td>
+							<td class=\"color\">".substr(strstr($value, "Цвет : "), 11, strpos(strstr($value, "Цвет : "), "\n")-11)."</td>
+							<td class=\"\">".substr(strstr($value, "Пол : "), 9, strpos(strstr($value, "Пол : "), "\n")-9)."</td>
+							<td class=\"age\">".substr(strstr($value, "Возраст : "), 16, strpos(strstr($value, "Возраст : "), "\n")-16)."</td>
+							<td class=\"size\">".substr(strstr($value, "Размер : "), 14, strpos(strstr($value, "Размер : "), "\n")-14)."</td>
 							<td class=\"price\">".substr(strstr($value, "Стоимость : "), 20, strpos(strstr($value, "Стоимость : "), "\n")-20)."</td>
-			<td><img src=".$link."alt=\"".$line[title]."\"width=\"80\" height=\"150\" align=\"right\"></td></tr>";
+			<td><img src=".$link."alt=\"".$line[title]."\"width=\"100\" height=\"150\" align=\"right\"></td></tr>";
 		}		
 	}
 } 
