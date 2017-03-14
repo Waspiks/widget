@@ -34,6 +34,7 @@ $message = "<!DOCTYPE html>
             <td id=\"age\" style=\"width : 10%;\"> Возраст      </td>
             <td id=\"size\" style=\"width : 5%;\"> Размер       </td>
             <td id=\"price\" style=\"width : 10%;\"> Стоимость    </td>
+            <td id=\"pict\" style=\"width : auto;\"> Эскиз    </td>
          </tr>"
 ;
 
@@ -46,8 +47,8 @@ foreach($datamsv[order_lines] as $N => $line){
 		$nocommentmsv = json_decode(curl_exec($ch), true);
 		curl_close($ch);
 //			$link = substr(strstr($value, "Изображение : "), 24);
-		$message .= "<tr><td id=\"tovar\">".$nocommentmsv[title]."</td>
-						<td id=\"quantity\">".$nocommentmsv[variants][0][quantity]."</td>
+		$message .= "<tr style=\"display: block;\" ><td id=\"tovar\" style=\"width : 25%;\">".$nocommentmsv[title]."</td>
+						<td id=\"quantity\" style=\"width : 5%;\">".$nocommentmsv[variants][0][quantity]."</td>
 						<td id=\"model\"></td>
 						<td id=\"color\"></td>
 						<td id=\"\"></td>
@@ -56,7 +57,7 @@ foreach($datamsv[order_lines] as $N => $line){
 						<td id=\"price\">".(int)$nocommentmsv[variants][0][price]."</td>"
 		;
 		if (!empty($nocomentmsv[image])){
-			$message .= "<td><img src=\"http://www.imgzilla.ru/image.uploads/2017-03-14/original-1c9fa77f58134e8e0d9840e7ef3974f4.jpg\" alt=\"".$nocommentmsv[title]."\"width=\"100\" height=\"150\" align=\"right\"></td></tr>";
+			$message .= "<td><img src=\"https://helixmedia.ru/images/2016-02-20%2013-24-20.jpg\" alt=\"".$nocommentmsv[title]."\"width=\"100\" height=\"150\" align=\"right\"></td></tr>";
 		} else {
 			$message .= "<td><img src=\"".$nocommentmsv[images][0][original_url]."\"alt=\"".$nocommentmsv[title]."\"width=\"100\" height=\"150\" align=\"right\"></td></tr>";
 		}
@@ -66,8 +67,8 @@ foreach($datamsv[order_lines] as $N => $line){
 		$delete = array_pop($commenties);
 		foreach($commenties as $value){
 			$link = substr(strstr($value, "Изображение : "), 24);
-			$message .= "<tr><td id=\"tovar\">".$line[title]."</td>
-							<td id=\"quantity\"> 1</td>
+			$message .= "<tr style=\"display: block;\" ><td id=\"tovar\" style=\"width : 25%;\" >".$line[title]."</td>
+							<td id=\"quantity\" style=\"width : 5%;\"> 1</td>
 							<td id=\"model\">".substr(strstr($value, "Модель : "), 15, strpos(strstr($value, "Модель : "), "\n")-15)."</td>
 							<td id=\"color\">".substr(strstr($value, "Цвет : "), 11, strpos(strstr($value, "Цвет : "), "\n")-11)."</td>
 							<td id=\"\">".substr(strstr($value, "Пол : "), 9, strpos(strstr($value, "Пол : "), "\n")-9)."</td>
