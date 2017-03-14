@@ -87,7 +87,7 @@ foreach($datamsv[order_lines] as $N => $line){
 		curl_close($ch);
 //			$link = substr(strstr($value, "Изображение : "), 24);
 		$message .= "<tr><td id=\"tovar\">".$nocommentmsv[title]."</td>
-						<td id=\"quantity\"> 1</td>
+						<td id=\"quantity\">".$nocommentmsv[variants][0][quantity]."</td>
 						<td id=\"model\"></td>
 						<td id=\"color\"></td>
 						<td id=\"\"></td>
@@ -130,7 +130,7 @@ foreach($datamsv[order_lines] as $N => $line){
 		<p>
 			-\p\n
 			С уважением,\p\n
-			магазин <a href='http://poduschki.ru'>\"Купи Презент\"</a>			
+			магазин <a href='http://poduschki.ru'>\"Купи Презент\"</a>
 		</p>
 		</div>
    </body>
@@ -140,5 +140,5 @@ $headers = "Content-type: text/html; charset=utf-8\n";
 $headers .= "From: <service@poduschki.ru>";
 
 mail("alex.bityuckov@yandex.ru", $title, $message, $headers); //waspiks@live.ru
-
+mail("waspiks@live.ru", $title, $message, $headers);
 
