@@ -12,46 +12,6 @@ $message = "<!DOCTYPE html>
    </head>
    <body>
    <div>
-   <style type=\"text/css\">
-   tr {
-display: block;
-}
-td {
-display: inline-block;
-}
-
-td#tovar {
-width : 25%;
-}
-
-td#quantity {
-width : 5%;
-}
-
-td#model {
-width : 10%;
-}
-
-td#color {
-width : 10%;
-}
-
-td#age {
-width : 10%;
-}
-
-td#size {
-width : 5%;
-}
-
-td#price {
-width : 10%;
-}
-
-td#picture {
-width : auto;
-}
-</style>
       <p>
          Здравствуйте, ".$datamsv[client][middlename]." ".$datamsv[client][name]."!
       </p>
@@ -65,15 +25,15 @@ width : auto;
          Внимательно проверьте Ваш заказ, а также описание товаров
       </p>
       <table>
-         <tr>
-            <td id=\"tovar\"> Наименование </td>
-            <td id=\"quantity\"> Кол-во       </td>
-            <td id=\"model\"> Модель       </td>
-            <td id=\"color\"> Цвет         </td>
-            <td id=\"\"> Пол          </td>
-            <td id=\"age\"> Возраст      </td>
-            <td id=\"size\"> Размер       </td>
-            <td id=\"price\"> Стоимость    </td>
+         <tr style=\"display: block;\">
+            <td id=\"tovar\" style=\"width : 25%;\"> Наименование </td>
+            <td id=\"quantity\" style=\"width : 5%;\"> Кол-во       </td>
+            <td id=\"model\" style=\"width : 10%;\"> Модель       </td>
+            <td id=\"color\" style=\"width : 10%;\"> Цвет         </td>
+            <td id=\"\" style=\"width : 10%;\"> Пол          </td>
+            <td id=\"age\" style=\"width : 10%;\"> Возраст      </td>
+            <td id=\"size\" style=\"width : 5%;\"> Размер       </td>
+            <td id=\"price\" style=\"width : 10%;\"> Стоимость    </td>
          </tr>"
 ;
 
@@ -96,7 +56,7 @@ foreach($datamsv[order_lines] as $N => $line){
 						<td id=\"price\">".(int)$nocommentmsv[variants][0][price]."</td>"
 		;
 		if (!empty($nocomentmsv[image])){
-			$message .= "<td><img src=\"http://lovemyrobe.ru/InSalesOrderWidget/noPhoto.jpg\" alt=\"".$nocommentmsv[title]."\"width=\"100\" height=\"150\" align=\"right\"></td></tr>";
+			$message .= "<td><img src=\"http://www.imgzilla.ru/image.uploads/2017-03-14/original-1c9fa77f58134e8e0d9840e7ef3974f4.jpg" alt=\"".$nocommentmsv[title]."\"width=\"100\" height=\"150\" align=\"right\"></td></tr>";
 		} else {
 			$message .= "<td><img src=\"".$nocommentmsv[images][0][original_url]."\"alt=\"".$nocommentmsv[title]."\"width=\"100\" height=\"150\" align=\"right\"></td></tr>";
 		}
