@@ -119,7 +119,7 @@ foreach($datamsv[order_lines] as $N => $line){
 	}
 } 
 		$message .= "</table>";
-		$message .= "Стоимость: ".$datamsv[items_price]." руб\n
+		$message .= "Стоимость: ".$datamsv[items_price]." руб\p\n
 		Доставка: ".$datamsv[full_delivery_price]." ".$line[delivery_title]." ".$line[delivery_description]."
 		</p>
 		<p>
@@ -128,8 +128,8 @@ foreach($datamsv[order_lines] as $N => $line){
 			"
 		</p>
 		<p>
-			-\n
-			С уважением,\n
+			-\p\n
+			С уважением,\p\n
 			магазин <a href='http://poduschki.ru'>\"Купи Презент\"</a>			
 		</p>
 		</div>
